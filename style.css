@@ -1,0 +1,22 @@
+:root {
+    display: flex;
+    min-height: 100%;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #29394b;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    width: 550px;
+    height:500px;
+    border: black solid 8px;
+}
+
