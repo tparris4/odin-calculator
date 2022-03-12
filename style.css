@@ -20,3 +20,20 @@ body {
     border: black solid 8px;
 }
 
+.button{
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.operand{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.display1 {
+    margin-top: auto;
+}
