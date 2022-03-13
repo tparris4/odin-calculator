@@ -1,4 +1,8 @@
 let container = document.querySelector("#container");
+let numbers = document.querySelector('.numbers');
+let operators = document.querySelector('.operators');
+let displayBox = document.querySelector('.displaybox');
+
 
 function add(a, b){
     return a + b;
@@ -22,16 +26,16 @@ function divide(a, b){
 function operate(operator, a, b){
     const operate = operator;
     switch (operate){
-        case "add":
+        case "+":
             add(a, b);
             break;
-        case "subtract":
+        case "-":
             subtract(a, b);
             break;
-        case "multiply":
+        case "x":
             multiply(a, b);
             break;
-        case "divide":
+        case "/":
             divide(a, b);
             break;
         default:
@@ -46,24 +50,27 @@ let displayArr = [];
 // let displayArr2 = [];
 let display1 = document.createElement("div");
 display1.classList.add("display1");
-container.appendChild(display1);
-display1.textContent = displayArr;
+displayBox.appendChild(display1);
+display1.textContent = "Tyler's Calculator";
 
 
 // clear button
-const clear = document.createElement("div");
+const clear = document.createElement('button');
 clear.classList.add("clear");
-container.appendChild(clear);
-clear.textContent = "=";
+operators.appendChild(clear);
+clear.textContent = "C";
 clear.addEventListener("click", () => {
-    
+    for(i of displayArr){
+        displayArr.pop();
+    }    
+    display1.textContent = displayArr; 
 })
 
 // equal sign
 // have to capture button presses 
-const equal = document.createElement("div");
+const equal = document.createElement('button');
 equal.classList.add("equal");
-container.appendChild(equal);
+operators.appendChild(equal);
 equal.textContent = "=";
 equal.addEventListener("click", () => {
     equalsEval();
@@ -84,33 +91,38 @@ function equalsEval(){
 // creates the operator buttons
 function createOperands(){
     let operArr = ['+', '-', 'x', '/'];
-    for (i of operaArr){
-        let operand = document.createElement("div");
+    for (i of operArr){
+        let operand = document.createElement('button');
         operand.classList.add("operand");
-        container.appendChild(operand);
+        operators.appendChild(operand);
         operand.textContent = i;
         operand.addEventListener("click", () => {
             displayArr.push(i);
+            let displayArrJoin = displayArr.join("");
+            display1.textContent = displayArr; 
         })
     }
 }
 
 // creates a digit button
 function createDigit(num){
-    let button = document.createElement("div");
-    button.classList.add("button");
-    container.appendChild(button);
-    button.textContent = num;
-    button.addEventListener("click", () => {
+    let digits = document.createElement('button');
+    digits.classList.add("digits");
+    numbers.appendChild(digits);
+    digits.textContent = num;
+    digits.addEventListener("click", () => {
         displayArr.push(num);
+        let displayArrJoin = displayArr.join("");
+        display1.textContent = displayArrJoin; 
     })
 }
 
 let buttonArr = [];
 
 // calls the createDigit function
-for(let i = 0; i < 10; i++){
+for(let i = 9; i >= 0; i--){
     buttonArr.push("Button" + i);
     createDigit(i);
 }
+createOperands();
 
