@@ -52,6 +52,7 @@ let display1 = document.createElement("div");
 display1.classList.add("display1");
 displayBox.appendChild(display1);
 display1.textContent = "Tyler's Calculator";
+const operArr = ['+', '-', '*', '/'];
 
 
 // clear button
@@ -78,12 +79,14 @@ equal.addEventListener("click", () => {
 
 // calls the operate function
 function equalsEval(){
+    // const check = displayArr.every()
     const oper = displayArr.find(element => element == '+' || element == '-' || element == 'x' || element == '/');
-    const operIndex = displayArr.findIndex(operand);
+    const operIndex = displayArr.findIndex(oper);
     const value1 = displayArr.slice(0, operIndex);
     const value2 = displayArr.slice(operIndex+1);
     let num1 = Number(value1.join(''));
     let num2 = Number(value2.join(''));
+    displayArr.splice(operIndex, 1);
     let evaluate = operate(oper, num1, num2);
     display1.textContent = evaluate;
 }
@@ -97,9 +100,14 @@ function createOperands(){
         operators.appendChild(operand);
         operand.textContent = i;
         operand.addEventListener("click", () => {
+            const displayStr = displayArr.toString();
+            if(displayStr.some(el => operArr.includes(el))){
+                equalsEval();
+            }
+
             displayArr.push(i);
             let displayArrJoin = displayArr.join("");
-            display1.textContent = displayArr; 
+            display1.textContent = displayArrJoin; 
         })
     }
 }
